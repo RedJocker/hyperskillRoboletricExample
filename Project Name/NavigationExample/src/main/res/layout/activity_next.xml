@@ -7,8 +7,7 @@
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
     tools:context=".NextActivity"
-    android:padding="15dp"
-    >
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/displayMessageTextView"
@@ -16,7 +15,6 @@
         android:layout_height="wrap_content"
         tools:text="placeholder"
         android:textAlignment="textStart"
-        android:textSize="30sp"
-        />
+        android:textSize="30sp"/>
 
 </LinearLayout>
