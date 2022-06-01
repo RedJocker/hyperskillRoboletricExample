@@ -70,6 +70,8 @@ class Stage1UnitTest : AbstractUnitTest<MainActivity>(MainActivity::class.java){
             return@testActivity nextStartedActivityIntent
         }
 
+        activityController.pause()
+        activityController.stop()
         val nextActivityUnityTest = object : AbstractUnitTest<NextActivity>(NextActivity::class.java){}
 
         nextActivityUnityTest.testActivity(nextActivityIntent) { nextActivity ->
