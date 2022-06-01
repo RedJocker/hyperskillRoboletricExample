@@ -72,7 +72,7 @@ class Stage1UnitTest : AbstractUnitTest<MainActivity>(MainActivity::class.java){
 
             assertEquals(
                 "after recreate messageEditText",
-                "0",
+                "1",
                 counterTextView.text.toString()
             )
         }
