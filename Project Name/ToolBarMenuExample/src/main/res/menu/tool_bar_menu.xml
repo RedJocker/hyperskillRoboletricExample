@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/settingsMenuItem"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/favoritesMenuItem"
+        android:title="Favorites"
+        android:icon="@drawable/ic_favorite"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/FeedbackMenuItem"
+        android:title="Give Feedback"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/CloseMenuItem"
+        android:title="Close App"
+        app:showAsAction="never" />
+
+</menu>

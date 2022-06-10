@@ -1,4 +1,6 @@
 type: framework
 content:
+- InitialTemplate
 - NavigationExample
 - SharedPreferencesPersistenceExample
+- ToolBarMenuExample
