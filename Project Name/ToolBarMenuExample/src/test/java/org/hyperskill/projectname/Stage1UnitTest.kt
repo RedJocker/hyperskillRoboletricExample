@@ -20,7 +20,7 @@ class Stage1UnitTest : AbstractUnitTest<MainActivity>(MainActivity::class.java){
             assertLastToastMessageEquals(
                 "Toast message was wrong",
                 "settings clicked"
-            ) // fail
+            )
         }
     }
 
@@ -32,7 +32,7 @@ class Stage1UnitTest : AbstractUnitTest<MainActivity>(MainActivity::class.java){
             assertLastToastMessageEquals(
                 "Toast message was wrong",
                 "settings clicked"
-            ) // fail
+            )
         }
     }
 
