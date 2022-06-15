@@ -4,3 +4,5 @@ content:
 - NavigationExample
 - SharedPreferencesPersistenceExample
 - ToolBarMenuExample
+- FragmentsExample
+- FragmentsExample2
