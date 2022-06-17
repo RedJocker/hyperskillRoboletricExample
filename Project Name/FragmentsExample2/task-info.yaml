@@ -36,3 +36,5 @@ files:
   visible: true
 - name: src/main/java/org/hyperskill/projectname/Observer.kt
   visible: true
+- name: src/main/java/org/hyperskill/projectname/FragmentsController.kt
+  visible: true

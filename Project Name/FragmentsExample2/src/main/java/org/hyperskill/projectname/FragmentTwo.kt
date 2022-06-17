@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 
 
-class FragmentTwo(val with: MainActivity) : Fragment() {
+class FragmentTwo(private val controller: FragmentsController) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,9 +17,9 @@ class FragmentTwo(val with: MainActivity) : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_two, container, false)
 
-        view.findViewById<Button>(R.id.myFragmentButton2).setOnClickListener {
-            with.activityFun2("on fragment two")
-            with.notifyFragment2Click()
+        view.findViewById<Button>(R.id.fragment2Button).setOnClickListener {
+            controller.activityFun2("on fragment two")
+            controller.notifyFragment2Click()
         }
         return view
     }

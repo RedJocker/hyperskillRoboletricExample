@@ -9,7 +9,7 @@
 
 
     <Button
-        android:id="@+id/myFragmentButton1"
+        android:id="@+id/fragment1Button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Click"

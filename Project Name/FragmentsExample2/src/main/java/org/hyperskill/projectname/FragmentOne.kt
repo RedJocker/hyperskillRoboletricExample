@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 
 
-class FragmentOne(val with: MainActivity) : Fragment() {
+class FragmentOne(private val controller: FragmentsController) : Fragment() {
 
 
 
@@ -19,9 +19,9 @@ class FragmentOne(val with: MainActivity) : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_one, container, false)
 
-        view.findViewById<Button>(R.id.myFragmentButton1).setOnClickListener { view ->
-            with.activityFun1("on fragment one", (view as Button))
-            with.notifyFragment1Click()
+        view.findViewById<Button>(R.id.fragment1Button).setOnClickListener { view ->
+            controller.activityFun1("on fragment one", (view as Button))
+            controller.notifyFragment1Click()
         }
 
         return view

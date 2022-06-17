@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 
-class FragmentThree(private val with: MainActivity) : Fragment(), Observer<Int> {
+class FragmentThree(private val controller: FragmentsController) : Fragment(), Observer<Int> {
 
     private val message = "fragment3 with counter: %d"
     lateinit var textView: TextView
@@ -22,7 +22,7 @@ class FragmentThree(private val with: MainActivity) : Fragment(), Observer<Int> 
         val view = inflater.inflate(R.layout.fragment_three, container, false)
 
         textView = view.findViewById<TextView>(R.id.fragment3MessageTextView).apply {
-            text = message.format(with.counter)
+            text = message.format(controller.with.counter)
         }
 
         return view
