@@ -111,7 +111,8 @@ class Stage1UnitTest : AbstractUnitTest<MainActivity>(MainActivity::class.java){
         testActivity {
             rvList
 
-            rvList.assertListItems(expectedList) { itemView, index, item ->
+            rvList.assertListItems(expectedList) { itemViewSupplier, index, item ->
+                val itemView = itemViewSupplier()
                 val listItemTvTitle = itemView.findViewByString<TextView>("listItemTvTitle")
                 val listItemTvDescription = itemView.findViewByString<TextView>("listItemTvDescription")
 

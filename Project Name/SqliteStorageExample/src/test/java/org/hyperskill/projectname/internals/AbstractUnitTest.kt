@@ -7,9 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import org.junit.Assert
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.robolectric.Robolectric
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
@@ -132,12 +130,17 @@ abstract class AbstractUnitTest<T : Activity>(clazz: Class<T>) {
     /**
      *  Makes assertions on the contents of the RecyclerView.
      *
-     *  Asserts that the size matches the size of fakeResultList and then calls assertItems for
-     *  each item of the list so that it is possible to make assertions on each item.
+     *  Asserts that the size matches the size of fakeResultList and then
+     *  calls assertItems for each item of the list with the itemViewSupplier
+     *  so that it is possible to make assertions on that itemView.
+     *
+     *  Take attention to refresh references to views coming from itemView since RecyclerView
+     *  can change the instance of View for a determinate list item after an update of the list
+     *  (ex: calling notifyItemChanged and similar methods).
      */
     fun <T> RecyclerView.assertListItems(
         fakeResultList: List<T>,
-        assertItems: (itemView: View, position: Int, item: T) -> Unit
+        assertItems: (itemViewSupplier: () -> View, position: Int, item: T) -> Unit
     ) : Unit {
 
         assertNotNull("Your recycler view adapter should not be null", this.adapter)
@@ -145,18 +148,29 @@ abstract class AbstractUnitTest<T : Activity>(clazz: Class<T>) {
         val expectedSize = fakeResultList.size
 
         val actualSize = this.adapter!!.itemCount
-        Assert.assertEquals("Incorrect number of list items", expectedSize, actualSize)
+        assertEquals("Incorrect number of list items", expectedSize, actualSize)
 
-        if(expectedSize > 0) {
-            val firstItemViewHolder = this.findViewHolderForAdapterPosition(0)
-                ?: throw java.lang.AssertionError("No item is being displayed on songList RecyclerView, is it big enough to display one item?")
+        if(expectedSize == 0) {
+            return
+        } else if(expectedSize > 0) {
+            val firstItemViewHolder = (0 until expectedSize)
+                .asSequence()
+                .mapNotNull {  this.findViewHolderForAdapterPosition(it) }
+                .firstOrNull()
+                ?: throw AssertionError("No item is being displayed on songList RecyclerView, is it big enough to display one item?")
 
-            // setting height to ensure that all items are inflated
-            this.layout(0,0, this.width, firstItemViewHolder.itemView.height * (expectedSize + 1))
+            val listHeight = firstItemViewHolder.itemView.height * (expectedSize + 1)
 
             for((i, song) in fakeResultList.withIndex()) {
-                val listItem = this.findViewHolderForAdapterPosition(i)!!.itemView
-                assertItems(listItem, i, song)
+                // setting height to ensure that all items are inflated. Height might change after assertItems, keep statement inside loop.
+                this.layout(0,0, this.width, listHeight)  // may increase clock time
+
+                val itemViewSupplier = {
+                    scrollToPosition(i)
+                    findViewHolderForAdapterPosition(i)?.itemView
+                        ?: throw AssertionError("Could not find list item with index $i")
+                }
+                assertItems(itemViewSupplier, i, song)
             }
 
         } else {
