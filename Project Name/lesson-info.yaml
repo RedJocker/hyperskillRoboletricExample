@@ -9,3 +9,4 @@ content:
 - SqliteStorageExample
 - NotificationExample
 - TimePickerDialogExample
+- PermissionWithRequestCode
