@@ -10,3 +10,4 @@ content:
 - NotificationExample
 - TimePickerDialogExample
 - PermissionWithRequestCode
+- PermissionWithActivityResultLauncher
